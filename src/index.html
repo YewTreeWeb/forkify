@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="preconnect" crossorigin href="https://fonts.googleapis.com/">
     <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:400,600,700" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon">
@@ -16,7 +17,7 @@
         <header class="header">
             <img src="img/logo.png" alt="Logo" class="header__logo">
             <form class="search">
-                <input type="text" class="search__field" placeholder="Search over 1,000,000 recipes...">
+                <input type="text" class="search__field" name="recipe" placeholder="Search over 1,000,000 recipes...">
                 <button class="btn search__btn">
                     <svg class="search__icon">
                         <use href="img/icons.svg#icon-magnifying-glass"></use>
@@ -49,7 +50,6 @@
                 </div>
             </div>
         </header>
-
 
         <div class="results">
             <ul class="results__list">
@@ -193,8 +193,6 @@
             </div>
         </div>
 
-
-
         <div class="recipe">
 
             <!--
@@ -337,10 +335,6 @@
             -->
         </div>
 
-
-
-
-
         <div class="shopping">
             <h2 class="heading-2">My Shopping List</h2>
 
@@ -435,8 +429,6 @@
 
         </div>
     </div>
-
-    <!-- <script  src="js/bundle.js"></script> -->
 </body>
 
 </html>
