@@ -1,23 +1,26 @@
-import axios from 'axios'
+import axios from "axios";
 
 class Search {
   constructor(query) {
-    this.query = query
+    this.query = query;
   }
 
   async getResults() {
-    const response = await axios(`https://forkify-api.herokuapp.com/api/search?q=${this.query}`)
-    
+    const response = await axios(
+      `https://forkify-api.herokuapp.com/api/search?q=${this.query}`
+    );
+
     if (response.status !== 200) {
-      throw new Error(`Cannot fetch the recipe/s! Has status of ${response.status}`);
+      throw new Error(
+        `Cannot fetch the recipe/s! Has status of ${response.status}`
+      );
     } else {
-      console.log(response);
+      if (process.env.NODE_ENV !== "production") console.log(response);
     }
-    
-    this.data = response.data.recipes
-    return this.data
+
+    this.data = response.data.recipes;
+    return this.data;
   }
 }
 
-
-export default Search
+export default Search;
