@@ -80,21 +80,28 @@ el.searchResPages.addEventListener("click", (e) => {
  */
 const controlRecipe = async () => {
   // Get the ID from the URL
-  const id = window.location.hash.replace("#", "");
-  console.log(id);
-
-  if (id) {
-    // Prepare the UI for changes
-    // Create new recipe object
-    state.recipe = new Recipe(id);
-    // Get recipe data
-    await state.recipe.getRecipe();
-    // Calculate servings and time
-    state.recipe.calcTime();
-    state.recipe.calcServings();
-    // Render recipe
-    console.log(state.recipe);
-  }
+	const id = window.location.hash.replace("#", "");
+	if (process.env.NODE_ENV !== 'production') {
+		console.log(id);
+	}
+	if (id) {
+		try {
+			// Prepare the UI for changes
+			// Create new recipe object
+			state.recipe = new Recipe(id);
+			// Get recipe data
+			await state.recipe.getRecipe();
+			// Calculate servings and time
+			state.recipe.calcTime();
+			state.recipe.calcServings();
+			// Render recipe
+			if (process.env.NODE_ENV !== 'production') {
+				console.log(state.recipe);
+			}
+		} catch (error) {
+			console.error(error);
+		}
+	}
 };
 
-window.addEventListener("hashchange", controlRecipe);
+['hashchange', 'load'].forEach(e => window.addEventListener(e, controlRecipe));
