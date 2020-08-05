@@ -25,13 +25,13 @@ const controlSearch = async (value) => {
   const query = value.trim().toLowerCase();
 
   if (query) {
-    try {
-      // New search object and add to state
-      state.search = new Search(query);
+		// New search object and add to state
+		state.search = new Search(query);
 
-      // Prepare UI for results
-      searchView.clear();
-      renderLoader(el.searchRes);
+		// Prepare UI for results
+		searchView.clear();
+		renderLoader(el.searchRes);
+    try {
 
       // Search for recipes
       await state.search.getResults();
@@ -85,10 +85,10 @@ const controlRecipe = async () => {
 		console.log(id);
 	}
 	if (id) {
+		// Prepare the UI for changes
+		// Create new recipe object
+		state.recipe = new Recipe(id);
 		try {
-			// Prepare the UI for changes
-			// Create new recipe object
-			state.recipe = new Recipe(id);
 			// Get recipe data
 			await state.recipe.getRecipe();
 			// Calculate servings and time
