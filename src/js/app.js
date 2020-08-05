@@ -25,14 +25,13 @@ const controlSearch = async (value) => {
   const query = value.trim().toLowerCase();
 
   if (query) {
+    // New search object and add to state
+    state.search = new Search(query);
+
+    // Prepare UI for results
+    searchView.clear();
+    renderLoader(el.searchRes);
     try {
-      // New search object and add to state
-      state.search = new Search(query);
-
-      // Prepare UI for results
-      searchView.clear();
-      renderLoader(el.searchRes);
-
       // Search for recipes
       await state.search.getResults();
 
@@ -60,6 +59,14 @@ form.addEventListener("submit", (e) => {
   controlSearch(searchValue);
 });
 
+// Testing
+// if (process.env.NODE_ENV !== "production") {
+//   window.addEventListener("load", (e) => {
+//     e.preventDefault();
+//     controlSearch("pizza");
+//   });
+// }
+
 el.searchResPages.addEventListener("click", (e) => {
   const btn = e.target.closest(".btn-inline");
   if (btn) {
@@ -80,28 +87,37 @@ el.searchResPages.addEventListener("click", (e) => {
  */
 const controlRecipe = async () => {
   // Get the ID from the URL
-	const id = window.location.hash.replace("#", "");
-	if (process.env.NODE_ENV !== 'production') {
-		console.log(id);
-	}
-	if (id) {
-		try {
-			// Prepare the UI for changes
-			// Create new recipe object
-			state.recipe = new Recipe(id);
-			// Get recipe data
-			await state.recipe.getRecipe();
-			// Calculate servings and time
-			state.recipe.calcTime();
-			state.recipe.calcServings();
-			// Render recipe
-			if (process.env.NODE_ENV !== 'production') {
-				console.log(state.recipe);
-			}
-		} catch (error) {
-			console.error(error);
-		}
-	}
+  const id = window.location.hash.replace("#", "");
+  if (process.env.NODE_ENV !== "production") {
+    console.log(id);
+  }
+  if (id) {
+    // Prepare the UI for changes
+    // Create new recipe object
+    state.recipe = new Recipe(id);
+
+    // Testing
+    // if (process.env.NODE_ENV !== "production") {
+    //   window.r = state.recipe;
+    // }
+
+    try {
+      // Get recipe data and parse ingredients
+      await state.recipe.getRecipe();
+      state.recipe.parseIngredients();
+      // Calculate servings and time
+      state.recipe.calcTime();
+      state.recipe.calcServings();
+      // Render recipe
+      if (process.env.NODE_ENV !== "production") {
+        console.log(state.recipe);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
 };
 
-['hashchange', 'load'].forEach(e => window.addEventListener(e, controlRecipe));
+["hashchange", "load"].forEach((e) =>
+  window.addEventListener(e, controlRecipe)
+);
