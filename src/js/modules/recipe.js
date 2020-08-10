@@ -53,7 +53,9 @@ class Recipe {
       "teaspoon",
       "cups",
       "pounds",
-      "grams",
+			"grams",
+			"milliliters",
+			"liters"
     ];
     const unitsShort = [
       "tbsp",
@@ -64,8 +66,11 @@ class Recipe {
       "tsp",
       "cup",
       "pound",
-      "g",
-    ];
+			"g",
+			"ml",
+			"l"
+		];
+		const units = [...unitsShort, 'kg']
 
     const newIngredients = this.ingredients.map((e) => {
       // 1. Uniform units
@@ -84,7 +89,7 @@ class Recipe {
       let objIng;
       if (unitIndex > -1) {
         // There is a unit
-        // 4 1/2 cups, arrCount is [4, 1/2] --> eval("4+1/2")  --> 4.5
+        // 4 1/2 cups, arrCount is [4, 1/2] --> eval("4 + 1/2")  --> 4.5
         // 4 cups, arrCount is [4]
         const arrCount = arrIng.slice(0, unitIndex);
         let count;
