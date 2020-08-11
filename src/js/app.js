@@ -23,12 +23,13 @@ const state = {}
  */
 const controlSearch = async value => {
   // Get query from view
-  let query
-  if (process.env.NODE_ENV !== 'production') {
-    query = 'pizza'
-  } else {
-    query = value.trim().toLowerCase()
-  }
+  // let query
+  // if (process.env.NODE_ENV !== 'production') {
+  //   query = 'pizza'
+  // } else {
+  //   query = value.trim().toLowerCase()
+  // }
+  const query = value.trim().toLowerCase()
 
   if (query) {
     // New search object and add to state
@@ -66,12 +67,12 @@ form.addEventListener('submit', e => {
 })
 
 // Testing
-if (process.env.NODE_ENV !== 'production') {
-  window.addEventListener('load', e => {
-    e.preventDefault()
-    controlSearch('pizza')
-  })
-}
+// if (process.env.NODE_ENV !== 'production') {
+//   window.addEventListener('load', e => {
+//     e.preventDefault()
+//     controlSearch('pizza')
+//   })
+// }
 
 el.searchResPages.addEventListener('click', e => {
   const btn = e.target.closest('.btn-inline')
@@ -98,17 +99,20 @@ const controlRecipe = async () => {
     console.log(id)
   }
   if (id) {
-		// Prepare the UI for changes
-		recipeView.clearRecipe()
-		renderLoader(el.recipe)
+    // Prepare the UI for changes
+    recipeView.clearRecipe()
+    renderLoader(el.recipe)
+
+    // Highlight selected search item
+    if (state.search) searchView.highlightSelected(id)
 
     // Create new recipe object
     state.recipe = new Recipe(id)
 
     // Testing
-    if (process.env.NODE_ENV !== 'production') {
-      window.r = state.recipe
-    }
+    // if (process.env.NODE_ENV !== 'production') {
+    //   window.r = state.recipe
+    // }
 
     try {
       // Get recipe data and parse ingredients
@@ -120,9 +124,9 @@ const controlRecipe = async () => {
       // Render recipe
       if (process.env.NODE_ENV !== 'production') {
         console.log(state.recipe)
-			}
-			clearLoader()
-			recipeView.renderRecipe(state.recipe)
+      }
+      clearLoader()
+      recipeView.renderRecipe(state.recipe)
     } catch (error) {
       console.error(error)
     }
@@ -130,3 +134,5 @@ const controlRecipe = async () => {
 }
 
 ;['hashchange', 'load'].forEach(e => window.addEventListener(e, controlRecipe))
+
+// Handling recipe button clicks

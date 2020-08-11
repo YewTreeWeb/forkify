@@ -9,6 +9,14 @@ const clear = () => {
   }
 };
 
+const highlightSelected = id => {
+	const resultsArr = Array.from(document.querySelectorAll('.results__link'))
+	const activeResult = document.querySelector(`a[href="#${id}"]`)
+
+	resultsArr.forEach(el => el.classList.remove('results__link--active'))
+	activeResult.classList.add('results__link--active')
+}
+
 /**
  * 'Pasta with tomato and spinach' = array of 5 elements
  * acc: 0 / acc + cur.length (5) = 5 / newTitle = ['Pasta']
@@ -95,4 +103,4 @@ const renderResults = (recipes, page = 1, resPerPage = 10) => {
   renderButtons(page, recipes.length, resPerPage);
 };
 
-export { renderResults, clear };
+export { renderResults, clear, highlightSelected };
