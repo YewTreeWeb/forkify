@@ -128,7 +128,7 @@ const controlRecipe = async () => {
       clearLoader()
       recipeView.renderRecipe(state.recipe)
     } catch (error) {
-      console.error(error)
+			console.error(error)
     }
   }
 }
@@ -136,3 +136,21 @@ const controlRecipe = async () => {
 ;['hashchange', 'load'].forEach(e => window.addEventListener(e, controlRecipe))
 
 // Handling recipe button clicks
+el.recipe.addEventListener('click', e => {
+	e.preventDefault()
+	if (e.target.matches('.btn-decrease, .btn-decrease *')) {
+		// Decrease button is clicked
+		if (state.recipe.servings > 1) {
+			state.recipe.updateServings('dec')
+			recipeView.updateServingsIngredients(state.recipe)
+		}
+	}
+	if (e.target.matches('.btn-increase, .btn-increase *')) {
+		// INcrease button is clicked
+		state.recipe.updateServings('inc')
+		recipeView.updateServingsIngredients(state.recipe)
+	}
+	if (process.env.NODE_ENV !== 'production') {
+		console.log(state.recipe)
+	}
+})
