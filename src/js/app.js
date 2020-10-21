@@ -172,11 +172,11 @@ el.shopping.addEventListener('click', e => {
  * Like Controller
  */
 const controlLike = () => {
-	if (!state.likes) state.like = new Likes()
+	if (!state.likes) state.likes = new Likes()
 	const currentID = state.recipe.id
 
 	// User has NOT yer like current recipe
-	if (!state.likes.isLiked()) {
+	if (!state.likes.isLiked(currentID)) {
 		// Add like to the state
 		const newLike = state.likes.addLike(
 			currentID,
@@ -188,12 +188,17 @@ const controlLike = () => {
 		// Toggle the like button
 
 		// Add like to the UI list
+		console.log(state.likes);
+
 	} else { // User HAS liked current recipe
 		// Remove like to the state
+		state.likes.deleteLike(currentID)
 
 		// Toggle the like button
 
 		// Remove like to the UI list
+		console.log(state.likes);
+
 	}
 }
 
