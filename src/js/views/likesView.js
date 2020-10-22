@@ -30,8 +30,10 @@ const renderLike = like => {
 }
 
 const deleteLike = id => {
-	const link = document.querySelector(`.likes__link[href*="${id}]`).parentElement
-	if (link) link.parentElement.removeChild(link)
+  const link = document.querySelector(`.likes__link[href*="${id}"]`)
+    .parentElement
+
+  if (link) link.parentElement.removeChild(link)
 }
 
 export { toggleLikeBtn, toggleLikeMenu, renderLike, deleteLike }
