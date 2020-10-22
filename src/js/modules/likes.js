@@ -3,7 +3,7 @@ class Likes {
     this.likes = []
   }
 
-  addLike (id, title, author, img) {
+  addLikes (id, title, author, img) {
 	const like = {
 		id,
 		title,
@@ -11,6 +11,7 @@ class Likes {
 		img
 	}
 	this.likes.push(like)
+	return like
   }
 
   deleteLike (id) {

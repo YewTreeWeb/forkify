@@ -11,7 +11,7 @@ const clear = () => {
 
 const highlightSelected = id => {
 	const resultsArr = Array.from(document.querySelectorAll('.results__link'))
-	const activeResult = document.querySelector(`a[href="#${id}"]`)
+	const activeResult = document.querySelector(`.results__link[href="#${id}"]`)
 
 	resultsArr.forEach(el => el.classList.remove('results__link--active'))
 	activeResult.classList.add('results__link--active')
@@ -103,4 +103,4 @@ const renderResults = (recipes, page = 1, resPerPage = 10) => {
   renderButtons(page, recipes.length, resPerPage);
 };
 
-export { renderResults, clear, highlightSelected };
+export { renderResults, clear, highlightSelected, limitRecipeTitle };
